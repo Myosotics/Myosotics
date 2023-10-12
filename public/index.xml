@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on A Hugo theme inspired by paged.js</title>
+    <link>/</link>
+    <description>Recent content in Home on A Hugo theme inspired by paged.js</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 01 Dec 2020 21:13:14 -0500</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction</title>
+      <link>/docs/01-intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/01-intro/</guid>
+      <description>The Hugo Paged theme was inspired by the paged.js website.
+The paged.js website The paged.js library is awesome. Its website is also beautiful.
+The crop marks I love the crop marks. I couldn&amp;rsquo;t imagine that they were made from three rectangles:
+&amp;lt;div class=&amp;quot;crop-h&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;!-- horizontal lines --&amp;gt; &amp;lt;div class=&amp;quot;crop-v&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;!-- vertical lines --&amp;gt; &amp;lt;div class=&amp;quot;crop-c&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;!-- cover some segments --&amp;gt; Make their position absolute, and shrink them a little bit:</description>
+    </item>
+    
+    <item>
+      <title>Getting started</title>
+      <link>/docs/02-get-started/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/02-get-started/</guid>
+      <description>There are two ways to get started with this theme, depending on whether you use R or Hugo.
+R users If you use R, the easiest way to get started is to install the blogdown package, and create a new site with this theme:
+install.packages(&#39;blogdown&#39;) blogdown::new_site(theme = &#39;yihui/hugo-paged&#39;) Or you can create a new RStudio blogdown project (if you use RStudio) with the yihui/hugo-paged theme.
+Hugo users Create a new Hugo site with hugo new.</description>
+    </item>
+    
+    <item>
+      <title>Customization</title>
+      <link>/docs/03-customization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/03-customization/</guid>
+      <description>The more you know, the less real work you will get done. You have been warned.
+Site config In your site config file (hugo.yaml or config.yaml), you can customize some options such as the top menu or footer, which should be straightforward to understand if you take a look at the exampleSite&amp;rsquo;s config file.
+If you want to add a logo to the left of the top navigation bar, you can use the logo parameter, e.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/blog/2020-12-01-r-rmarkdown/</link>
+      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
+      
+      <guid>/blog/2020-12-01-r-rmarkdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+    <item>
+      <title>A Plain Markdown Post</title>
+      <link>/blog/2016-02-14-hello-markdown/</link>
+      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2016-02-14-hello-markdown/</guid>
+      <description>Sample Text Third-level header Fourth-level header A paragraph (with a footnote):
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Lorem Ipsum</title>
+      <link>/blog/2015-07-23-lorem-ipsum/</link>
+      <pubDate>Thu, 23 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2015-07-23-lorem-ipsum/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Quisque mattis volutpat lorem vitae feugiat.</description>
+    </item>
+    
+    <item>
+      <title>About Hugo Paged</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>I immediately loved the design of the paged.js website when I first saw it a couple of years ago.1 I have published a few books before, so the crop marks on the website caught my attention first, which gave me a familiar feel of printed books. The second thing that I appreciated was the rotated floral heart bullet behind the title of each page, i.e.,
+❧ So I wrote a Hugo theme that mimics the style of the paged.</description>
+    </item>
+    
+    <item>
+      <title>Search</title>
+      <link>/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/search/</guid>
+      <description>The searching is performed via fuse.js. For the search keywords, white spaces act as the AND operator, and | acts as the OR operator. To match an exact phrase, double quote it. For example, R Markdown matches articles that contain both R and Markdown, R | Markdown matches articles that contain R or Markdown, and &amp;quot;R Markdown&amp;quot; matches articles that contain the whole phrase R Markdown.</description>
+    </item>
+    
+  </channel>
+</rss>

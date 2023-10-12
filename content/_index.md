@@ -21,10 +21,10 @@ title: Home
 }
 </style>
 
-<h1 class="title">Hugo Paged</h1>
+<h1 class="title">My Personal Website</h1>
 
-## _by_ Yihui Xie
+## _by_ Myosotics
 
-- CLEAN-CUT
-- PRINT FEEL
-- MINIMAL CSS
+This is my personal website, as a students, i want to record some contents of my studies.
+
+这是我的个人主页，目前作为一个研究生，将平常的学习内容记录在这里。
