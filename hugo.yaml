@@ -1,6 +1,6 @@
 baseurl: "/"
 languageCode: "en-US"
-title: "A Hugo theme inspired by paged.js"
+title: "The Personal Website of Myosotics"
 theme: "hugo-paged"
 ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 footnotereturnlinkcontents: "↩"
