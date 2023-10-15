@@ -57,21 +57,66 @@ Ketan and Vora, Deepali R. and Abraham, Ajith and Gabralla,Lubna Abdelkareim
 2. Title: A Review on Machine Learning Styles in Computer Vision-Techniques and Future Directions  
 3. Journal: IEEE ACCESS  
 
-# 研究内容
+# 文章框架
 
+<div class="figure" style="text-align: center">
+<img src="images/outlineofpapers.png" alt="Outline of papers"  />
+<p class="caption"><span id="fig:outlineofpapers"></span>Figure 1: Outline of papers</p>
+</div>
 
 # 文章观点
 
-1. 机器学习是一种人工智能(AI)，它通过学习和扩展以前的经验来训练计算机像人类一样思考。
+1.机器学习是一种人工智能(AI)，它通过学习和扩展以前的经验来训练计算机像人类一样思考。
 
-2. 对于数据的预测和分析任务，机器学习分为三种类型：监督学习、无监督学习和半监督学习。
+2.对于数据的预测和分析任务，机器学习分为三种类型：监督学习、无监督学习和半监督学习。
 
-3. 计算机视觉的应用领域、相应的机器学习方式和(Python)程序实现库：
+3.计算机视觉的应用领域、相应的机器学习方式和(Python)程序实现库：
+<div class="figure" style="text-align: center">
+<img src="images/AIincomputervision.png" alt="AI in computervision"  />
+<p class="caption"><span id="fig:AIincomputervision"></span>Figure 2: AI in computervision</p>
+</div>
+4. 每种机器学习方式的演变发展史：
+<div class="figure" style="text-align: center">
+<img src="images/evolutionML.png" alt="Evolution of machine learning styles"  />
+<p class="caption"><span id="fig:evolutionML"></span>Figure 3: Evolution of machine learning styles</p>
+</div>
+5. 机器学习风格分类：
+<div class="figure" style="text-align: center">
+<img src="images/MLtaxonomy.png" alt="Taxonomy of machine learning styles classification"  />
+<p class="caption"><span id="fig:MLtaxonomy"></span>Figure 4: Taxonomy of machine learning styles classification</p>
+</div>
 
-![caption](images/AIincomputervision.png)
+# 各机器学习风格基本思想
+
+## Primary Styles
+
+文章此处进一步分为了Supervised, Unsupervised, Reinforcement三种类别。
+
+### Supervised
+
+监督学习的机器学习任务是将每个输入项转换为所需的类标签值。监督学习大致分为两类，
+即分类和回归。监督学习的流程流如fig <a href="#fig:supervised">5</a> 所示，其输入是经过特征
+提取的有标签数据，随后训练模型。训练后的模型将应用于测试数据集来预测结果。性能精
+度通过比较预测和实际输出来计算得到。
+<div class="figure" style="text-align: center">
+<img src="images/supervised.png" alt="Framework of supervised learning"  />
+<p class="caption"><span id="fig:supervised"></span>Figure 5: Framework of supervised learning</p>
+</div>
+监督学习的优点： 
+
+1. 监督学习给出的分类结果比无监督学习的更加准确。
+2. 用有标签数据集去训练和测试模型是容易。
+
+监督学习的缺点：
+
+1. 训练数据缺失。
+2. 数据质量低。
+3. 对于训练数据欠拟合或过度拟合。
+4. 机器学习的过程是复杂的。
+
+#### Multiple Instance Learning
 
 
 
-Data annotation and labeling is
-the only problem in computer vision and machine learning
-applications.
+
+
