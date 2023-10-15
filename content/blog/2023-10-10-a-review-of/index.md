@@ -68,7 +68,7 @@ Ketan and Vora, Deepali R. and Abraham, Ajith and Gabralla,Lubna Abdelkareim
 
 3. 计算机视觉的应用领域、相应的机器学习方式和(Python)程序实现库：
 
-![](images/AI in computer vision.png)
+![caption](images/AIincomputervision.png)
 
 
 
