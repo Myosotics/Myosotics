@@ -111,7 +111,28 @@ knitr::include_graphics("images/supervised.png")
 
 #### Multiple Instance Learning
 
+MIL是一种缺乏监督的学习形式，其中训练样本被收集到bag中，并为整个bag而不是特定案
+例(instance)提供标签。fig \@ref(fig:MIL) 展示了MIL训练阶段的框架。
 
+```{r, MIL, fig.cap = "Framework of multiple instance learning", echo=FALSE, fig.align='center'}
+knitr::include_graphics("images/MIL.png")
+```
 
+MIL常假设正instance和负instance分别独立地从正instance分布和负instance分布
+中采样，然而这并不符合现实世界的情况。例如以下两种情况：
 
+1. Similarities Within the Bag;
+2. Co-Occurrence of instances;  
+3. Instance and Bag Structure.[^1]
 
+[^1]: 注意此处并非来自论文原本，具体来自知乎：<https://zhuanlan.zhihu.com/p/299819082>.
+
+MIL的优点：
+
+1. MIL深度神经网络能够学习最优地表示给定训练数据的特征；
+2. 分类性能较差。
+
+MIL的缺点：
+
+1. 池化函数是提前定义的且不可训练；
+2. 超参数r是全局的，因此，它不适应新的instance。
