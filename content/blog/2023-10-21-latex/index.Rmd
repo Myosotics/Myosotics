@@ -1,0 +1,268 @@
+---
+title: Latex模板讲解
+author: Myosotics
+date: '2023-10-21'
+slug: []
+categories:
+  - Coding
+tags:
+  - Latex
+  - Beamer
+---
+
+# 导言区
+
+1. `\documentclass{beamer}`用以规定文档的类型 beamer 。 class 指定想要的文档类型，
+通过 options 参数可以定制文档类的属性，不同的选项之间必须用逗号隔开。
+```{latex eval=FALSE, echo=TRUE}
+# 源格式
+\documentclass[option]{class}
+# 模板格式
+\documentclass[hyperref,UTF8,11pt]{beamer}
+```
+`11pt`是设置文档中所使用字体大小，默认为`10pt`；`UTF-8`是设置编码；引入`hyperref`
+后再编译文档时，会根据章节结构，自动生成目录结构的文档标签，同时，正文中的目录和
+所有交叉引用，都会自动生为超链接，可以用鼠标点击跳转到引用位置，这是`hyperref`宏
+包在此类文档中的一个缩用。
+
+2. `\usepackage{}`是加载宏包
+
+3. `\setbeamersize{}`，调整左右两侧的页边距。注意 beamer 幻灯片的尺寸是`$128mm \times 96mm$` ，
+这个尺寸固定无法修改，但左右两侧的页边距可以修改。此处`0.042\paperwidth`是指整个
+页面纸张`paperwith`的宽度的`$4.2\%$`。
+
+
+```{latex eval = F, echo = T}
+\setbeamersize{text margin left=0.042\paperwidth,text margin right=0.042\paperwidth}
+```
+
+
+3. `hyperref`宏包用以实现超链接功能，涉及的链接遍布`LATEX`的每一个角落——目录、
+引用、脚注、索引、参考文献等等都被封装成超链接。但这也使得它与其他宏包发生冲突的
+可能性大大则更加，故而习惯上将`hyperref`宏包放在其他宏包之后调用。  
+`hyperref`宏包提供了命令`\hypersetup`配置各种参数。参数也可以作为宏包选项，在调
+用宏包时指定：
+```{latex eval = F, echo = T}
+\hypersetup{⟨option1⟩,⟨option2⟩={value},…}
+\usepackage[⟨option1⟩,⟨option2⟩={value},…]{hyperref}
+```
+`CJKbookmarks=true`用以指明是否生成书签。
+
+
+这里主要解释如下代码：
+```{latex eval=FALSE, echo=TRUE}
+\documentclass{beamer}%[hyperref,UTF8,11pt]
+\usepackage{ctex}
+\usepackage[utf8]{inputenc}
+\setbeamersize{text margin left=0.042\paperwidth,text margin right=0.042\paperwidth}% 调整左右边距
+
+\usepackage{fontspec}
+\usepackage{comment}
+\usepackage{xeCJK}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{bm}
+
+\usepackage{array} 
+\usepackage{cases}
+\usepackage{multirow} 
+\usepackage{enumerate}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{xcolor} % 提供对颜色的支持
+\usepackage{amsmath, amsfonts, amssymb} % math equations, symbols
+\usepackage[english]{babel}
+\usepackage{color}      % color content
+\usepackage{graphicx}   % import figures
+\usepackage{url}        % hyperlinks
+\usepackage{bm}         % bold type for equations
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{epstopdf}
+\usepackage{epsfig}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\hypersetup{CJKbookmarks=true} 
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newtheorem{assumption}{假设}
+\newtheorem{proposition}{性质}
+\usepackage{booktabs} 
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\beamertemplatetextbibitems
+
+\setcounter{tocdepth}{1}
+\usepackage{subcaption}
+\usepackage{amsmath}
+
+\usepackage{ustcbeamersx}
+\graphicspath{{image/}}
+
+\setsansfont{Microsoft YaHei} % 一般建议是微软雅黑，可以修改成其他字体。
+\setCJKmainfont{Microsoft YaHei}
+%\setCJKmainfont{SimHei}
+\usefonttheme{professionalfonts}
+
+
+
+% 第一页的设置
+\title[毕业论文答辩]{\zihao{3} 上海财经大学Beamer模板}% 方括号内容显示在页脚，花括号内容是全称
+
+\author{\noindent XXX}
+\institute[SUFE]
+{   
+	\noindent 上海财经大学2024级\\
+	\medskip
+	\noindent \textit{ liangyu1096@163.com} 
+}
+\date{\noindent xxxx年x月x日} 
+
+
+
+\AtBeginSection[]% 每章之前加目录，不喜欢可以注释掉
+{
+	\begin{frame}{目录}
+		\transfade%淡入淡出效果
+		\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide] %突出显示当前章节，而其它章节都进行了淡化处理
+		\addtocounter{framenumber}{-1}  %目录页不计算页码
+	\end{frame}
+}
+
+
+\begin{document}
+	\begin{frame}
+		\pgfdeclareimage[width=\paperwidth,height=0.9575\paperheight]{bg}{111.png}
+		%\transfade 渐变
+		\titlepage % Print the title page as the first slide
+	\end{frame}
+	
+%\section{工作简介}
+	\begin{frame}{工作简介}
+		\pgfdeclareimage[width=\paperwidth,height=0.9575\paperheight]{bg}{112.png}
+		%\transfade
+		\onslide<1->条目；
+		
+		\onslide<2->条目：
+		\begin{itemize}
+			\item<3-> 条目；
+			\item<4-> 条目；
+		\end{itemize}
+		%	\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{目录}  % 总的目录页 可以注释掉
+		%[width=\paperwidth,height=0.9575\paperheight]{bg}{112.png}
+		%\transfade%淡入淡出 
+		\tableofcontents 
+	\end{frame}		
+	
+	
+	\section{图}
+		\begin{frame}{图}
+		\begin{columns}[T] % align columns
+			\begin{column}<0->{.65\textwidth}
+				\begin{itemize}
+					\item<1-> 123
+					\begin{itemize}
+						\item<1->123 
+						\item<1-> 123
+					\end{itemize}
+					\item<2-> 123
+					\begin{itemize}	
+						\item<2-> 123
+					\end{itemize}
+				\end{itemize}
+			\end{column}%			
+			\hfill%	
+			\begin{column}<0->{.40\textwidth}
+				\begin{figure}[thpb]
+					\centering
+					\resizebox{1\linewidth}{!}{
+							\includegraphics{ustc-logo.jpg}
+					}
+					%\includegraphics[scale=1.0]{figurefile}
+					%\caption{}
+					\label{fig:campus}
+				\end{figure}
+			\end{column}%
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}{图}
+		\begin{figure}[htb]
+			%  \centering
+			\label{fig:example}
+			\begin{subfigure}{.45\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]{ustc-logo.jpg}
+				\caption{校徽}
+				\label{fig:logoa}
+			\end{subfigure}
+			\begin{subfigure}{.45\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]{ustc-logo.jpg}
+				\caption{校徽}
+				\label{fig:logob}
+			\end{subfigure}
+			\caption{校徽}
+			%\note{注：}
+		\end{figure}
+	\end{frame}
+	
+	
+	\section{表格}
+	\begin{frame}{表格}
+		\footnotesize
+		\begin{table}[htb]
+			\setlength{\abovecaptionskip}{-1mm} 
+		%	\setlength{\belowcaptionskip}{-2.3mm}
+			\centering
+			\caption{三线表}
+			\label{tab:err1}
+			%\resizebox{\textwidth}{19mm}{ %用于控制表格宽度
+				\begin{tabular}{ccccccccc}
+					\toprule
+					\text{模型}&\text{组别}  & $D_0$ & $D_1$  & $D_2$                    \\
+					\midrule
+					1&(1.1) & 0.0600&	0.0600&	0.0800  \\
+					&(1.2) & 0.0600&	0.0600&	0.0800  \\
+					2&(2.1) & 0.0600&	0.0600&	0.0800  \\
+					&(2.2) & 0.0600&	0.0600&	0.0800  \\
+					\bottomrule
+			\end{tabular}%}
+			%  \note{注：} %可以调整字体
+		\end{table}
+		
+	\end{frame}
+	
+	\section{定理}
+	\begin{frame}{定理}
+		\begin{theorem}[勾股定理]
+			勾三股四弦五。
+		\end{theorem}
+	证明：
+	xxx，证毕。
+	
+	$\hfill\qedsymbol$
+	\end{frame}
+
+    \section{总结}
+	\begin{frame}
+		\frametitle{总结}
+		
+	\end{frame}
+	
+	
+	
+	
+	\begin{frame}
+		\frametitle{致谢}
+		\centerline{\Huge 谢谢!}
+	\end{frame}
+	
+	
+	
+\end{document}
+```

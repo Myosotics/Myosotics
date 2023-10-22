@@ -60,7 +60,7 @@ Ketan and Vora, Deepali R. and Abraham, Ajith and Gabralla,Lubna Abdelkareim
 # 文章框架
 
 <div class="figure" style="text-align: center">
-<img src="images/outlineofpapers.png" alt="Outline of papers"  />
+<img src="images/outlineofpapers.png" alt="Outline of papers" width="408" />
 <p class="caption"><span id="fig:outlineofpapers"></span>Figure 1: Outline of papers</p>
 </div>
 
@@ -72,17 +72,17 @@ Ketan and Vora, Deepali R. and Abraham, Ajith and Gabralla,Lubna Abdelkareim
 
 3.计算机视觉的应用领域、相应的机器学习方式和(Python)程序实现库：
 <div class="figure" style="text-align: center">
-<img src="images/AIincomputervision.png" alt="AI in computervision"  />
+<img src="images/AIincomputervision.png" alt="AI in computervision" width="426" />
 <p class="caption"><span id="fig:AIincomputervision"></span>Figure 2: AI in computervision</p>
 </div>
 4. 每种机器学习方式的演变发展史：
 <div class="figure" style="text-align: center">
-<img src="images/evolutionML.png" alt="Evolution of machine learning styles"  />
+<img src="images/evolutionML.png" alt="Evolution of machine learning styles" width="510" />
 <p class="caption"><span id="fig:evolutionML"></span>Figure 3: Evolution of machine learning styles</p>
 </div>
 5. 机器学习风格分类：
 <div class="figure" style="text-align: center">
-<img src="images/MLtaxonomy.png" alt="Taxonomy of machine learning styles classification"  />
+<img src="images/MLtaxonomy.png" alt="Taxonomy of machine learning styles classification" width="434" />
 <p class="caption"><span id="fig:MLtaxonomy"></span>Figure 4: Taxonomy of machine learning styles classification</p>
 </div>
 
@@ -92,14 +92,14 @@ Ketan and Vora, Deepali R. and Abraham, Ajith and Gabralla,Lubna Abdelkareim
 
 文章此处进一步分为了Supervised, Unsupervised, Reinforcement三种类别。
 
-### Supervised
+### Supervised Learning
 
 监督学习的机器学习任务是将每个输入项转换为所需的类标签值。监督学习大致分为两类，
 即分类和回归。监督学习的流程流如fig <a href="#fig:supervised">5</a> 所示，其输入是经过特征
 提取的有标签数据，随后训练模型。训练后的模型将应用于测试数据集来预测结果。性能精
 度通过比较预测和实际输出来计算得到。
 <div class="figure" style="text-align: center">
-<img src="images/supervised.png" alt="Framework of supervised learning"  />
+<img src="images/supervised.png" alt="Framework of supervised learning" width="674" />
 <p class="caption"><span id="fig:supervised"></span>Figure 5: Framework of supervised learning</p>
 </div>
 监督学习的优点： 
@@ -120,7 +120,7 @@ MIL是一种缺乏监督的学习形式，其中训练样本被收集到bag中�
 例(instance)提供标签。fig <a href="#fig:MIL">6</a> 展示了MIL训练阶段的框架。
 
 <div class="figure" style="text-align: center">
-<img src="images/MIL.png" alt="Framework of multiple instance learning"  />
+<img src="images/MIL.png" alt="Framework of multiple instance learning" width="796" />
 <p class="caption"><span id="fig:MIL"></span>Figure 6: Framework of multiple instance learning</p>
 </div>
 
@@ -142,3 +142,11 @@ MIL的缺点：
 
 1. 池化函数是提前定义的且不可训练；
 2. 超参数r是全局的，因此，它不适应新的instance。
+
+### Reinforcement Learning
+
+
+
+
+
+

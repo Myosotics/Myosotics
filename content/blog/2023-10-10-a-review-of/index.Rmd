@@ -88,7 +88,7 @@ knitr::include_graphics("images/MLtaxonomy.png")
 
 文章此处进一步分为了Supervised, Unsupervised, Reinforcement三种类别。
 
-### Supervised
+### Supervised Learning
 
 监督学习的机器学习任务是将每个输入项转换为所需的类标签值。监督学习大致分为两类，
 即分类和回归。监督学习的流程流如fig \@ref(fig:supervised) 所示，其输入是经过特征
@@ -136,3 +136,11 @@ MIL的缺点：
 
 1. 池化函数是提前定义的且不可训练；
 2. 超参数r是全局的，因此，它不适应新的instance。
+
+### Reinforcement Learning
+
+
+
+
+
+
