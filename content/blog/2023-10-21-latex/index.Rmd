@@ -48,6 +48,7 @@ tags:
 ```
 `CJKbookmarks=true`用以指明是否生成书签。
 
+4. 
 
 这里主要解释如下代码：
 ```{latex eval=FALSE, echo=TRUE}

@@ -50,7 +50,24 @@ tags:
 之后一般第三方库的路径实在`.\Lib\site-packages`中。
 ![](images/check_package_place.png)
 
+## 手动配置pip镜像源
 
-
-
+手动配置，windows下，直接在user目录中创建一个pip目录，再新建文件`pip.ini`。
+![](images/source_setting.png)
+接着打开`pip.ini`文件，复制粘贴以下内容并保存。
+```{c eval = F, echo = T}
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+```
+注意此处是设置了清华源为例，国内镜像源有如下
+```{c eval = F, echo = T}
+清华
+https://pypi.tuna.tsinghua.edu.cn/simple
+豆瓣
+http://pypi.douban.com/simple/
+阿里   
+http://mirrors.aliyun.com/pypi/simple/   
+中国科学技术大学
+http://pypi.mirrors.ustc.edu.cn/simple/ 
+```
 
