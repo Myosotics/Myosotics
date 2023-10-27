@@ -1,9 +1,8 @@
 ---
-title: 'Multi-Instance Learning: A Survey(1)'
+title: "Multi-Instance Learning: A Survey"
 author: Myosotics
-date: '2023-10-21'
+date: '2023-10-27'
 slug: []
-runtime: shiny
 categories:
   - Article
 tags:
@@ -11,6 +10,7 @@ tags:
   - Machine Learning
   - Supervised Learning
 ---
+
 
 # 摘要
 
@@ -55,6 +55,8 @@ learning 背景的问题。进一步，说明该算法发展的重要性和研�
 第四个部分为 Learning Algorithm 部分。介绍了除第二个部分提及的 APR 算法以外的
 multi-instance 的五种算法的主要思想，其中这五种算法分别是 Diverse Density, 
 Citation-kNN,  ID3-MI, RIPPER-MI, and BP-MIP。
+
+第五个部分为Application，介绍了 MIL 的相关应用。
 
 第六个部分为 Extension 部分。首先，介绍了 MIL 在实数输出结果预测的相关情况。然后，点出了前面第四部分中算法应用场景与最初始问题
 应用场景的不同，进一步规范 MIL 的定义。接下来，又对 multi-instance 问题进行分类。
@@ -117,77 +119,49 @@ supervised learning 和 multi-instance learning 的主要区别是能否(较好�
  
 目前大部分现存的 multi-instance learning 算法均是从 supervised learning algorithm 
 改进而得到的：将 supervised learning algorithms 的 focuses 从识别 instances 转移到
-识别 bags。此处主要介绍检验了五种算法。
+识别 bags。此处主要介绍检验了五种算法。具体详见：
 
-## Diverse Density
+[Multi-Instance Learning: A Survey-Learning Algorithm](/blog/2023-10-27-2023-10-21-multi-instance-learning-a-survey-2/)
 
-Diverse Density 算法将每个 bag 当作一个包含许多特征向量(instance)的 manifold，并
-且假定一个新的 positive bag 与所有 positive 的 feature-manifolds 相关，而与 negative
-feature-manifolds 不相关。目标是计算一个点在 feature space 中的 maximum diverse density。
+# Application
 
-给定一个数据集`$D$`和一组类别标签`$C=\{c_1,c_2,\cdots,c_t\}$`去预测，在假定
-`$P_r(D)$`为常数和`$c_k$`服从均匀分布的基础上，利用 Bayes rule，标签的后验概率计算
-为
-\begin{equation}
-  \begin{aligned}
-    Obj &=Pr(C|D)]\\
-        &\propto \mathop{\arg \max}\limits_{1\leqslant k\leqslant t}P_r(D|c_k)
-  \end{aligned}(\#eq:DD-1)
-\end{equation}
-公式 \@ref(eq:DD-1) 在目标是区分 instances 时已经足够，但是对于区分 bag 时，需要考虑
-`$D = \{B_1^+,\cdots,B_m^+,B^-_1,\cdots,B_n^-\}$`，其中`$B_i^+$`和`$B_j^-$`分别表示
-第`$i$`个 positive bag 和第`$j$`个 negative bag。在假定 bag 间是条件独立的基础上，
-再次利用 Bayes rule，公式 \@ref(eq:DD-1) 进一步得到如下：
-`$$Obj = \mathop{\arg\max}\limits_{1\leqslant k\leqslant t}\prod_{1\leqslant i\leqslant m}Pr(c_k|B^+_i)\prod_{1\leqslant j\leqslant n}Pr(c_k|B_j^{-})$$`
+在将 Multi-instance Learning 应用到实际中时，需要关注两个重点问题。第一个是合适的
+multi-instance learning 的 algorithm 的选择。第二个是如何将现实问题转化为 multi-instance
+representation，即决定什么是 bag，什么是instance，我们称这些转化方法为 bag generators。
+这两个问题后者更重要。  
+对于 multi-instance 的应用：`$Maron$` 和 `$Lozano-P\acute{e}rez$`[^1]提出了两种应用：
+一种是从一系列图片中对一个人进行简单的描述，另一种是股票的选择；`$Maron$`和`$Ratan$`
+[^2]将 Diversity Density 应用到了 natural scene classification 这一 image understanding
+task 中；`$Yang$`和`$Lonzano-P\acute{e}rez$`[^3]则扩展了 Diverse Density algorithm并将其
+应用到了基于内容的图像检索问题中；`Zhou`等人[^4]也应用 Diverse Density 到基于内容的
+图像检索问题中，但他们同时发展了一种名字为 ImaBag 的 bag generator；最近，`Zhou`
+等人[^5]又应用 multi-instance learning 到一种特定的网页挖掘任务即 web index page 
+recommendation 中去；multi-instance learning 也被应用到机器人控制中去[^6]，具体为
+landmark matching；此外，`$Weiss$`和`$Hirsh$`[^7]提出了将 event prediction 转化为
+multi-instance 问题，而`$Ruffo$`[^8]也应用 multi-instance decision tree 到诸如
+password checking, intrusion detection, network management等computer security 问题中。
 
-此即一个 class label 的最大后验概率，具体地，一个 feature space 中特定的点`$x$`的
-class label 如公式 \@ref(eq:DD-2) 所示，其中`$(x=c_k)$`意味`$x$`的 label 为`$c_k$`。  
-\begin{equation}
-Obj^x= \mathop{\arg\max}\limits_{1\leqslant k \leqslant t}
-\prod_{1\leqslant i\leqslant m}Pr(x=c_k|B^+_i)
-\prod_{1\leqslant j\leqslant n} Pr(x=c_k|B^-_j)(\#eq:DD-2)
-\end{equation}
-
-进一步，如果我们想在 feature space中 找到一个点，在这个点上，特定的 class label `$c_h$` 的
-最大后验概率是最大的，这个点可以通过下式确定：
-`\begin{align}\hat{x}&=\mathop{\arg\max}\limits_{x}Pr(Obj^x=c_h)\notag\\&=\mathop{\arg\max}\limits_{x}\prod_{1\leqslant i\leqslant m}Pr(x=c_h|B^+_i)\prod_{1\leqslant j\leqslant n}Pr(x=c_h|B^-_j)\notag\end{align}`
-
-上式清晰地定义了 maximum diverse density。  
-Diverse Density algorithm 在 `Musk` 数据上的效果不如 Iterated-discrim APR，但是
-它并不限制于 `Musk` 数据。同时 EM-DD algorithm 在提出时在 `Musk` 数据上效果是最好的。
-
-<span style="color:red">注意</span>：
-此处未搞懂`$c_k$`的具体含义，以及该算法究竟是如何计算得到 bag 的label的，
-需要进一步查看相关论文[^1]。
-
-[^1]: O. Maron and T. Lozano-P´erez. A framework for multiple-instance learning. In M.I.
+[^1]:O. Maron and T. Lozano-P´erez. A framework for multiple-instance learning. In M.I.
 Jordan, M.J. Kearns, and S.A. Solla, Eds. Advances in Neural Information Processing
 Systems 10, Cambridge, MA: MIT Press, pp.570–576, 1998.
-
-## Citation-KNN
-
-Citation-KNN 是一个 nearest neighbor algorithm，并借鉴了科学文献中引用和参考的概念，
-即在考虑 bag 附件的 bag 的基础上还考虑将相关 bag 视为邻近的 bag。  
-在一般的 k-nearest neighbor algorithm 中，每个 object(or instance) 被视作为 feature
-space 中的一个 feature vector，且对于两个 feature vector 的距离，常用 Euclidean distance，即
-$$
-Dist(a,b)=\lVert a-b \rVert.
-$$
-为判断 bag 的标签，需要对上式进行修改，即采用 minimal Hausdorff distance：给定两个 bag
-`$A=\{a_1,\cdots,a_m\}$`和`$B=\{b_1,\cdots,b_n\}$`，其中`$a_i(1\leqslant i \leqslant m)$`和
-`$b_j(1\leqslant j \leqslant n)$`是 instance。将其看作两个 feature set，则这两个bag
-的距离衡量为
-$$
-\begin{aligned}
-Dist(A,B)&=\mathop{MIN}\limits_{1\leqslant i\leqslant m,1\leqslant j\leqslant n}(Dist(a_i,b_j))\\
-&=\mathop{MIN}\limits_{a\in A}\mathop{MIN}\limits_{b\in B}\lVert a-b\rVert
-\end{aligned}
-$$
-由于 positive bag 中并非所有 instance 均为 positive，可能会对结果造成一定影响，故而
-引用和参考的概念被引用。
-
-<span style="color:red">注意</span>：Citation的具体含义未懂，需要进一步论文[^2].
-
-[^2]: J. Wang and J.-D. Zucker. Solving the multiple-instance problem: a lazy learning
-approach. In Proceedings of the 17th International Conference on Machine Learning,
-San Francisco, CA, pp.1119–1125, 2000.
+[^2]:O. Maron and A.L. Ratan. Multiple-instance learning for natural scene classification.
+In Proceedings of the 15th International Conference on Machine Learning, Madison,
+WI, pp.341–349, 1998.
+[^3]:C. Yang and T. Lozano-P´erez. Image database retrieval with multiple-instance
+learning techniques. In Proceedings of the 16th International Conference on Data
+Engineering, San Diego, CA, pp.233–243, 2000
+[^4]:Z.-H. Zhou, M.-L. Zhang, and K.-J. Chen. A novel bag generator for image database
+retrieval with multi-instance learning techniques. In Proceedings of the 15th IEEE
+International Conference on Tools with Artificial Intelligence, Sacramento, CA,
+pp.565–569, 2003.
+[^5]:Z.-H. Zhou and M.-L. Zhang. Neural networks for multi-instance learning. Technical
+Report, AI Lab, Computer Science & Technology Department, Nanjing University,
+Nanjing, China, Aug. 2002.
+[^6]:S.A. Goldman, S.S. Kwek, and S.D. Scott. Agnostic learning of geometric patterns.
+Journal of Computer and System Sciences, vol.62, no.1, pp.123–151, 2001.
+[^7]:G.M. Weiss and H. Hirsh. Event prediction: learning from ambiguous examples. In
+Working Notes of the NIPS’98 Workshop on Learning from Ambiguous and Complex
+Examples, Breckenridge, CO, 1998.
+[^8]:G. Ruffo. Learning single and multiple instance decision tree for computer security
+applications. PhD dissertation, Department of Computer Science, University of
+Turin, Torino, Italy, Feb. 2000.

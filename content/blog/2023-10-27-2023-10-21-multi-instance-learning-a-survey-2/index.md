@@ -1,0 +1,183 @@
+---
+title: "Multi-Instance Learning: A Survey-Learning Algorithm"
+author: Myosotics
+date: '2023-10-27'
+slug: []
+categories:
+  - Article
+tags:
+  - Computer Science
+  - Machine Learning
+  - Supervised Learning
+---
+
+上接：[Multi-Instance Learning: A Survey](/blog/2023-10-27-2023-10-21-multi-instance-learning-a-survey-1/)
+
+# Learning Algorithm
+
+supervised learning 和 multi-instance learning 的主要区别是能否(较好地)识别instances。
+ 
+目前大部分现存的 multi-instance learning 算法均是从 supervised learning algorithm 
+改进而得到的：将 supervised learning algorithms 的 focuses 从识别 instances 转移到
+识别 bags。此处主要介绍检验了五种算法。
+
+## Diverse Density
+
+Diverse Density 算法将每个 bag 当作一个包含许多特征向量(instance)的 manifold，并
+且假定一个新的 positive bag 与所有 positive 的 feature-manifolds 相关，而与 negative
+feature-manifolds 不相关。目标是计算一个点在 feature space 中的 maximum diverse density。
+
+给定一个数据集`$D$`和一组类别标签`$C=\{c_1,c_2,\cdots,c_t\}$`去预测，在假定
+`$P_r(D)$`为常数和`$c_k$`服从均匀分布的基础上，利用 Bayes rule，标签的后验概率计算
+为
+`\begin{equation}
+  \begin{aligned}
+    Obj &=Pr(C|D)]\\
+        &\propto \mathop{\arg \max}\limits_{1\leqslant k\leqslant t}P_r(D|c_k)
+  \end{aligned}\tag{1}
+\end{equation}`
+公式 (1) 在目标是区分 instances 时已经足够，但是对于区分 bag 时，需要考虑
+`$D = \{B_1^+,\cdots,B_m^+,B^-_1,\cdots,B_n^-\}$`，其中`$B_i^+$`和`$B_j^-$`分别表示
+第`$i$`个 positive bag 和第`$j$`个 negative bag。在假定 bag 间是条件独立的基础上，
+再次利用 Bayes rule，公式(1)进一步得到如下：
+`\begin{equation}
+Obj = \mathop{\arg\max}\limits_{1\leqslant k\leqslant t}
+\prod_{1\leqslant i\leqslant m}Pr(c_k|B^+_i)
+\prod_{1\leqslant j\leqslant n} Pr(c_k|B_j^{-})\notag
+\end{equation}`
+
+此即一个 class label 的最大后验概率，具体地，一个 feature space 中特定的点`$x$`的
+class label 如公式(2)所示，其中`$(x=c_k)$`意味`$x$`的 label 为`$c_k$`。  
+`\begin{equation}
+Obj^x= \mathop{\arg\max}\limits_{1\leqslant k \leqslant t}
+\prod_{1\leqslant i\leqslant m}Pr(x=c_k|B^+_i)
+\prod_{1\leqslant j\leqslant n} Pr(x=c_k|B^-_j)\tag{2}
+\end{equation}`
+
+进一步，如果我们想在 feature space中 找到一个点，在这个点上，特定的 class label `$c_h$` 的
+最大后验概率是最大的，这个点可以通过下式确定：
+$$
+`\begin{align}
+\hat{x}&=\mathop{\arg\max}\limits_{x}Pr(Obj^x=c_h)\notag\\
+&=\mathop{\arg\max}\limits_{x}\prod_{1\leqslant i\leqslant m}Pr(x=c_h|B^+_i)\prod_{1\leqslant j\leqslant n}Pr(x=c_h|B^-_j)\notag
+\end{align}`
+$$
+上式清晰地定义了 maximum diverse density。  
+Diverse Density algorithm 在 `Musk` 数据上的效果不如 Iterated-discrim APR，但是
+它并不限制于 `Musk` 数据。同时 EM-DD algorithm 在提出时在 `Musk` 数据上效果是最好的。
+
+<span style="color:red">注意</span>：
+此处未搞懂`$c_k$`的具体含义，以及该算法究竟是如何计算得到 bag 的label的，
+需要进一步查看相关论文[^1]。
+
+[^1]: O. Maron and T. Lozano-P´erez. A framework for multiple-instance learning. In M.I.
+Jordan, M.J. Kearns, and S.A. Solla, Eds. Advances in Neural Information Processing
+Systems 10, Cambridge, MA: MIT Press, pp.570–576, 1998.
+
+## Citation-KNN
+
+Citation-KNN 是一个 nearest neighbor algorithm，并借鉴了科学文献中引用和参考的概念，
+即在考虑 bag 附件的 bag 的基础上还考虑将相关 bag 视为邻近的 bag。  
+在一般的 k-nearest neighbor algorithm 中，每个 object(or instance) 被视作为 feature
+space 中的一个 feature vector，且对于两个 feature vector 的距离，常用 Euclidean distance，即
+$$
+Dist(a,b)=\lVert a-b \rVert.
+$$
+为判断 bag 的标签，需要对上式进行修改，即采用 minimal Hausdorff distance：给定两个 bag
+`$A=\{a_1,\cdots,a_m\}$`和`$B=\{b_1,\cdots,b_n\}$`，其中`$a_i(1\leqslant i \leqslant m)$`和
+`$b_j(1\leqslant j \leqslant n)$`是 instance。将其看作两个 feature set，则这两个bag
+的距离衡量为
+$$
+`\begin{aligned}
+Dist(A,B)&=\mathop{MIN}\limits_{1\leqslant i\leqslant m,1\leqslant j\leqslant n}(Dist(a_i,b_j))\\
+&=\mathop{MIN}\limits_{a\in A}\mathop{MIN}\limits_{b\in B}\lVert a-b\rVert
+\end{aligned}`
+$$
+由于 positive bag 中并非所有 instance 均为 positive，可能会对结果造成一定影响，故而
+引用和参考的概念被引用。
+
+<span style="color:red">注意</span>：Citation的具体含义未懂，需要进一步论文[^2].
+
+[^2]: J. Wang and J.-D. Zucker. Solving the multiple-instance problem: a lazy learning
+approach. In Proceedings of the 17th International Conference on Machine Learning,
+San Francisco, CA, pp.1119–1125, 2000.
+
+## ID3-MI
+
+ID3-MI 是一个 decision tree algorithm，遵循 divide-and-conquer 的方式。广义上，
+decision tree 有两个部分，即如何选择分离 tree nodes 的 test 和如何利用 tree 做
+预测。在这里，ID3-MI algorithm 做出预测的方式与标准的 decision tree 相同，故问 
+题的关键在于前者，进一步转化为 multi-instance entropy 的定义。  
+给定数据集`$D$`，其中有`$p$`个 positive bag 和`$n$`个 negative instance，则定
+义`$D$`关于该分类的 entropy 为
+`\begin{equation}
+Info(D) = -\frac{p}{p+n}\log_2(\frac{p}{p+n})-\frac{n}{p+n}\log_2(\frac{n}{p+n}) \tag{3}
+\end{equation}`
+假定 attribute `$A$`被选择作为 test，并将`$D$`分为`$\{D_1,\cdots,D_l\}$`，令`$\lvert D\rvert$`和`$\lvert D_i \rvert$`分别表示`$D$`和`$D_i$`中的 instance 的数目，则
+information gain of A on D 计算如下： 
+`\begin{equation}
+  \begin{aligned}
+    Gain(D,A) &=Info(D)-Info(D,A)\\
+    &=Info(D)-\sum_{i=1}^l\frac{|D_i|}{|D|}Info(D_i)
+  \end{aligned}\tag{4}
+\end{equation}`
+上式当目标是对 instance 进行分类时用来选择 decision tree 的合适的 test 是足够的。
+但为了区分 bag，还需要进行调整。令`$\pi(D)$`和`$v(D)$`分别表示`$D$`中的
+positive 和 negative的 bag 的数量，则公式(3)改写如下：
+$$
+`\begin{aligned}
+Info_{multi}(D)&=-\frac{\pi(D)}{\pi(D)+v(D)}\log_2\left(\frac{\pi(D)}{\pi(D)+v(D)}\right)\\
+&-\frac{v(D)}{\pi(D)+v(D)}\log_2\left(\frac{v(D)}{\pi(D)+v(D)}\right)
+\end{aligned}`
+$$
+从而在 bag 的水平下， information gain of A on D，即公式(4)改写如下
+$$
+`\begin{aligned}
+Gain_{multi}(D,A)&=Info_{multi}(D)-Info_{multi}(D,A)\\
+&=Info_{multi}(D)-\sum_{i=1}^l\frac{\pi(D_i)+v(D_i)}{\pi(D)+v(D)}Info_{multi}(D_i).
+\end{aligned}`
+$$          
+同时，直接运用该式会导致计算较复杂，故可以用一种轻微的 divide-and-conquer 方式
+来调整，即当一个positive bag 中的 instance 被预测为 positive 时，将该包中其他
+instance 移除掉，这样便可以得到一个相对简单的 tree。
+
+## RIPPER-MI
+
+RIPPER-MI 是一个 rule induction algorithm。RIPPER-MI 和 supervised learner,i.e. RIPPER,
+唯一不同的地方在于 coverage 的定义不同。  
+给定数据集`$D$`，rule R 的 coverage 定义如公式(5)所示。
+`\begin{equation}
+Cover(R)=|\{instance_i|Cover(R,instance_i)\}| \tag{5}
+\end{equation}`
+其中，`$Cover(R,instace_i)$`意味`$D$`中的第`$i$`个 instace 被 rule R 
+所 cover。公式(5)对于区分 instances 时是足够的，但当区分包时，
+需要对 coverage function 进行扩展。故有下式：
+$$
+`\begin{aligned}
+Cover_{multi}(R,bag)&=(\exists instance \in bag)Cover(R,instance)\notag\\
+Coverage_{multi}(R) &= |\{bag_i|Cover_{multi}(R,bag_i)\}|\notag
+\end{aligned}`
+$$
+
+## BP-MIP
+
+BP-MIP 是一个 feedforward neural network，它比较 desired output 和 actual output，
+并反向传输 error 并更新连接间的权重和 the thresholds of the units。  
+BP-MIP 训练过程与经验的 BP algorithm 基本一致，关键在于 multi-instance error function
+的定义，该 function 用于衡量 neural network 的error，进而作为被优化的 objective。  
+给定数据集`$D$`，其中有`$l$`个instance，令 `$o_i$`和`$d_i$`分别表示第`$i$`个instance
+的 actual output 和 desired output，则 error 定义如下：
+`\begin{equation}
+E = \sum_{i=1}^lE_i=\sum_{i=1}^l\frac12(o_i-d_i)^2 \notag
+\end{equation}`
+上式对于区分 instance 时是足够的，但是为了区分 bag，需要进一步扩展 error function。
+令`$o_{ij}$`表示数据集`$D$`的第`$i$`个 bag 的第`$j$`个instance的 actual output，
+`$m_i$`表示第`$i$`个bag中的instance总数，进而在 bag 的水平下，error function 定义如下  
+`\begin{equation}
+  \begin{aligned}
+    o_i&=\mathop{\max}\limits_{1\leqslant j\leqslant m_{i}}o_{ij}\notag\\
+    E&=\sum_{i=1}^lE_i=\sum_{i=1}^l \frac12\left( \mathop{\max}\limits_{1\leqslant j \leqslant m_i}o_{ij}-d_i \right)^2\notag
+  \end{aligned}
+\end{equation}`
+
+
