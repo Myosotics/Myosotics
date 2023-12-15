@@ -73,3 +73,10 @@ http://mirrors.aliyun.com/pypi/simple/
 http://pypi.mirrors.ustc.edu.cn/simple/ 
 ```
 
+# 第三方库安装
+
+## pip安装大法
+
+在命令行窗口使用`pip install packages`即可，例如，以安装`numba`库为例。
+![](images/pip_install_package.png)
+
