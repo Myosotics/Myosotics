@@ -11,7 +11,7 @@ outputs:
 menu:
   main:
     - name: Github
-      url: "https://github.com/yihui/hugo-paged"
+      url: "https://github.com/Myosotics"
       weight: 10
       params:
         class: [optional]
@@ -22,7 +22,8 @@ params:
     en:
       alt: LOGO TEXT
       img: # a path to the logo
-  footer: "&copy; [Yihui Xie](https://yihui.org) {Year}"
+  footer: "&copy; [Yu Liang](https://myosotics.netlify.app/) {Year}| [Github](https://github.com/Myosotics)"
+
 
 markup:
   highlight:
